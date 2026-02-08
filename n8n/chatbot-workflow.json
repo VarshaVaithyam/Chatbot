@@ -1,0 +1,147 @@
+{
+  "name": "CHATBOT",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "CHATBOT",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -816,
+        0
+      ],
+      "id": "a30147cd-6792-4eec-a6a1-0bdc85037f53",
+      "name": "Webhook",
+      "webhookId": "f8f8f124-3ec5-4622-a855-47166bd96f73"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0ebc5353-3fa2-4742-b312-16338993d7b8",
+              "name": "userMessage",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "363bfac3-5a68-4c19-8b73-678f74ffdd98",
+              "name": "timestamp",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            },
+            {
+              "id": "df65a443-6f18-4839-8144-ea30e76a71fb",
+              "name": "source",
+              "value": "=\"web\"",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -496,
+        0
+      ],
+      "id": "3fa61797-8250-4107-b01e-4fd6b2882a50",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=x-goog-api-key",
+              "value": "={{ $env.GEMINI_API_KEY }}\n"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\n  \"contents\": [\n\n    {\n\n      \"parts\": [\n\n        {\n\n          \"text\": \"{{ $json.userMessage }}\"\n\n        }\n\n      ]\n\n    }\n\n  ]\n\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -208,
+        0
+      ],
+      "id": "22b68bf2-308b-4d75-b2b3-baf0b6650096",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"reply\": $json.candidates[0].content.parts[0].text } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        80,
+        0
+      ],
+      "id": "43ff4153-c01c-4500-a049-5ec52f977f33",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "9abbfae5-c4c0-49cc-9568-f01ca079fe23",
+  "meta": {
+    "instanceId": "b5a06032297db81ddb3c7bf20335cdb802acc3a5eecfee28dc74e8a285a8597f"
+  },
+  "id": "NbU1AwVF9ZJXtX_SPqlSt",
+  "tags": []
+}
