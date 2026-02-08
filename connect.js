@@ -1,4 +1,4 @@
-const webhookUrl = "YOUR_API_CREDENTIALS_HERE";
+const webhookUrl = "https://YOUR_NEW_WEBHOOK_URL";
 
 function addMessage(text, sender) {
   const chatBox = document.getElementById("chat-box");
