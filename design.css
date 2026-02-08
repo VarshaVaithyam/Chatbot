@@ -1,0 +1,99 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Full screen center */
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Chat container */
+.chat-container {
+  width: 420px;
+  height: 90vh;               /* 🔥 LIMIT TO SCREEN */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.chat-container h2 {
+  text-align: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Messages area */
+#chat-box {
+  flex: 1;                    /* 🔥 TAKE REMAINING SPACE */
+  overflow-y: auto;           /* 🔥 SCROLL ONLY HERE */
+  padding: 15px;
+  background: #fafafa;
+}
+
+/* User message */
+.user {
+  max-width: 80%;
+  margin-left: auto;
+  margin-bottom: 10px;
+  background: #080808;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 18px 18px 4px 18px;
+  word-wrap: break-word;
+}
+
+/* Bot message */
+.bot {
+  max-width: 80%;
+  margin-right: auto;
+  margin-bottom: 10px;
+  background: #e9ecef;
+  color: #333;
+  padding: 10px 14px;
+  border-radius: 18px 18px 18px 4px;
+  word-wrap: break-word;
+  white-space: pre-wrap;      /* 🔥 PRESERVE LINE BREAKS */
+}
+
+/* Input area fixed at bottom */
+.input-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: white;
+}
+
+/* Input box */
+input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Send button */
+button {
+  margin-left: 8px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  background: #060606;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #474748;
+}
