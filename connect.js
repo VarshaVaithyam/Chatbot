@@ -1,4 +1,4 @@
-const webhookUrl = "https://varshavaithyam06.app.n8n.cloud/webhook/CHATBOT";
+const webhookUrl = "YOUR_API_CREDENTIALS_HERE";
 
 function addMessage(text, sender) {
   const chatBox = document.getElementById("chat-box");
@@ -20,11 +20,9 @@ async function sendMessage() {
   const message = input.value.trim();
   if (!message) return;
 
-  // 1️⃣ Show user message
   addMessage(message, "user");
   input.value = "";
 
-  // 2️⃣ Show typing indicator
   const typingDiv = addMessage("Thinking...", "bot");
 
   try {
@@ -42,7 +40,6 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    // 3️⃣ Show AI reply
     typingDiv.innerText = data.reply || "No response from AI";
 
   } catch (error) {

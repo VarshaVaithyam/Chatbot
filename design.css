@@ -18,7 +18,7 @@ body {
 /* Chat container */
 .chat-container {
   width: 420px;
-  height: 90vh;               /* 🔥 LIMIT TO SCREEN */
+  height: 90vh;               
   background: white;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -35,8 +35,8 @@ body {
 
 /* Messages area */
 #chat-box {
-  flex: 1;                    /* 🔥 TAKE REMAINING SPACE */
-  overflow-y: auto;           /* 🔥 SCROLL ONLY HERE */
+  flex: 1;                   
+  overflow-y: auto;          
   padding: 15px;
   background: #fafafa;
 }
@@ -63,7 +63,7 @@ body {
   padding: 10px 14px;
   border-radius: 18px 18px 18px 4px;
   word-wrap: break-word;
-  white-space: pre-wrap;      /* 🔥 PRESERVE LINE BREAKS */
+  white-space: pre-wrap;      
 }
 
 /* Input area fixed at bottom */
